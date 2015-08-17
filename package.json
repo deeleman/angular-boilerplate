@@ -1,30 +1,47 @@
 {
-  "name": "frontend-boilerplated",
+  "name": "angular-boilerplated",
   "version": "1.0.0",
-  "description": "A Frontend boilerplate template to rapidly kickstart new projects based on Gulp, SASS and Livereload",
+  "description": "An Angular 1.4.x boilerplate template to rapidly kickstart new projects based on Angular, Gulp, SASS and Livereload",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "karma start --single-run && ./node_modules/.bin/protractor protractor.conf.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/deeleman/frontend-boilerplate.git"
+    "url": "https://github.com/deeleman/angular-boilerplate.git"
   },
   "author": "Pablo Deeleman",
   "license": "ISC",
   "devDependencies": {
+    "angular-mocks": "^1.4.4",
+    "chai": "^3.2.0",
+    "chai-as-promised": "^5.1.0",
+    "connect": "^3.4.0",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.3.1",
     "gulp-concat": "^2.6.0",
     "gulp-livereload": "^3.8.0",
+    "gulp-minify-html": "^1.0.4",
     "gulp-notify": "^2.2.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.0.4",
     "gulp-serve": "^1.0.0",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-uglify": "^1.2.0",
-    "gulp-watch": "^4.3.3"
+    "gulp-watch": "^4.3.3",
+    "karma": "^0.13.9",
+    "karma-chai": "^0.1.0",
+    "karma-mocha": "^0.2.0",
+    "karma-mocha-reporter": "^1.1.1",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "mocha": "^2.2.5",
+    "phantomjs": "^1.9.18",
+    "protractor": "^2.1.0",
+    "serve-static": "^1.10.0"
   },
   "dependencies": {
+    "angular": "^1.4.3",
+    "angular-resource": "^1.4.3",
+    "angular-ui-router": "^0.2.15"
   }
 }

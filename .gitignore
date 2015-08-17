@@ -13,9 +13,6 @@ results
 npm-debug.log
 node_modules
 
-## Bower
-src/components
-
 ## Sass
 .sass-cache
 
@@ -35,5 +32,4 @@ Desktop.ini
 $RECYCLE.BIN/
 
 ## Build
-public/assets/css
-public/assets/js
+public/

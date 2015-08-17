@@ -1,13 +1,12 @@
 'use strict';
 
-module.exports = function (gulpContainer, settings, errorHandler) {
+module.exports = function (gulpContainer, settings, errorHandler, livereload) {
     var gulp = gulpContainer.gulp;
     var sass = require('gulp-sass');
     var autoprefixer = require('gulp-autoprefixer');
     var sourcemaps = require('gulp-sourcemaps');
     var rename = require('gulp-rename');
     var watch = require('gulp-watch');
-    var livereload = require('gulp-livereload');
     var config = settings.sass;
 
     gulp.task('sass:app', function () {
@@ -28,7 +27,6 @@ module.exports = function (gulpContainer, settings, errorHandler) {
     });
 
     gulp.task('sass:watch', ['sass:app'], function () {
-        livereload.listen();
         watch(config.src, { ignoreInitial: false, verbose: true }, function() {
             gulp.start('sass:app');
         });

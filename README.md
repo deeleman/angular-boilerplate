@@ -1,11 +1,12 @@
-# Frontend Boilerplate
+# Angular Boilerplate
 
-This boilerplate repo provides a simple nifty template to quickly kick start development on a new project requiring the following:
+This boilerplate repo, based on my very own [Frontend Boilerplate](https://github.com/deeleman/frontend-boilerplate), provides a simple nifty template to quickly kick start development on a new project requiring the following:
 
 * SASS building and compiling into CSS in two flavors (normal and compressed) with auto-prefixing support
 * Javascript concatenation and build in two flavors (normal and uglified)
 * Built-in web server for debugging purposes (based on Connect)
 * File change tracking (including adding or unlinking files on runtime) with browser LiveReload support
+* Complete Angular 1.4.x scaffolding and 3rd party dependency management with full support for real time adding and managing dependencies and bundling its source files in a minified way onto the project.
 
 All the aforementioned features are configurable so any change in paths and filenames can be done effortlessly.
 
@@ -33,6 +34,12 @@ What has just happened? After installing all third-party dependencies, the `gulp
 ### Where to store your files
 
 This template takes separation of concerns quite seriously, so development and build files live in different workspaces in order to prevent errors and ease the development effort. Here you have a rundown of the different locations you have:
+
+#### Third-party dependencies and Angular plugins and extension modules
+TBD
+
+#### Karma and Protractor test files
+TBD
 
 #### Source Javascript files
 Please store all your Javascript files belonging to your project at `src/js`. Anything available there will be later on digested into a single application file and saved onto `public/assets/js` (the HTML shell already points out to the destination location) by tracking down all dependencies found from `src/js/index.js`and beyond. **Never save Javascript files in the the `public` root path**. The building configuration will do that for you and it is not a good practice to mix up build files with actual dev files. Same applies to third-party dependencies.

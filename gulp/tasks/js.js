@@ -1,15 +1,15 @@
 'use strict';
 
-module.exports = function (gulpContainer, settings, errorHandler) {
+module.exports = function (gulpContainer, settings, errorHandler, livereload) {
     var gulp = gulpContainer.gulp;
     var concat = require('gulp-concat');
     var uglify = require('gulp-uglify');
     var sourcemaps = require('gulp-sourcemaps');
     var rename = require('gulp-rename');
-    var livereload = require('gulp-livereload');
+    var watch = require('gulp-watch');
     var config = settings.js;
 
-    gulp.task('js', function() {
+    gulp.task('js:src', function() {
         gulp.src(config.src)
             .on('error', errorHandler)
             .pipe(concat(config.dest.filename))
@@ -21,7 +21,13 @@ module.exports = function (gulpContainer, settings, errorHandler) {
             .pipe(livereload());
     });
 
-    livereload.listen();
+    gulp.task('js:watch', ['js:src'], function () {
+        watch(config.src, { ignoreInitial: false, verbose: true }, function() {
+            gulp.start('js:src');
+        });
+    });
+
+    gulp.task('js', ['js:watch']);
 
     gulpContainer.getContainer('dev').addTask('js');
 };

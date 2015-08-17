@@ -84,8 +84,12 @@
 
     // Custom Globals
     "globals"       : {
-        "require"   : true,
-        "module"    : true,
-        "__dirname" : true
+        "require"   : true,     // true: Tolerate CommonJS global methods
+        "module"    : true,     // true: Tolerate CommonJS global methods
+        "__dirname" : true,     // true: Tolerate Node.js global variables
+        "inject"    : true,     // true: Do not complain with Angular testing utility methods
+        "expect"    : true,     // true: Tolerate BDD global methods
+        "should"    : true,     // true: Tolerate BDD global methods
+        "angular"   : true      // true: Silent all error warnings about angualr not defined
     }
 }
