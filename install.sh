@@ -1,7 +1,7 @@
 #!/bin/bash
 
 clear
-printf "The installation script will install the NPM modules required along with the BDD and E2E tools required for testing.\n"
+printf "The installation script will install the NPM modules required along with the BDD and E2E tooling needed for testing.\n"
 printf "Once the installation is completed the build will be triggered. You can check then the site build at http://localhost:3000\n"
 printf "Please note that this script might require at some point your SUDO password.\n\n"
 printf "\033[30;42m Press [ENTER] key to continue...\033[0m"

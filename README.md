@@ -39,7 +39,9 @@ This template takes separation of concerns quite seriously, so development and b
 TBD
 
 #### Karma and Protractor test files
-TBD
+You will find kickstart templates for your unit tests already available at `/test/ng` (at the time of this writing the template sets a proper template for filters). Feel free to finetune the Karma settings file `/karma.conf.js`.
+
+For all your functional and E2E testing requirements the installation script deployed already a fully functional Selenium webdriver with Chrome as the default headless browser engine. Feel free to finetune the Protractor settings file `/protractor.conf.js`.
 
 #### Source Javascript files
 Please store all your Javascript files belonging to your project at `src/js`. Anything available there will be later on digested into a single application file and saved onto `public/assets/js` (the HTML shell already points out to the destination location) by tracking down all dependencies found from `src/js/index.js`and beyond. **Never save Javascript files in the the `public` root path**. The building configuration will do that for you and it is not a good practice to mix up build files with actual dev files. Same applies to third-party dependencies.
@@ -53,7 +55,7 @@ Please store your Gulp tasks as standalone module files into `gulp/tasks`. A com
 ```javascript
 'use strict';
 
-module.exports = function (gulpContainer, settings, errorHandler) {
+module.exports = function (gulpContainer, settings, errorHandler, livereload) {
     var gulp = gulpContainer.gulp;
     // Your task dependencies and variables would go below this line
     // ...
@@ -82,7 +84,7 @@ There will be case scenarios where you will be wanting to access Gulp directly b
 Let's figure out for argument's sake that you want to leverage plugins such as `gulp-sequence` (a *Javascript newbie* asked me this question once) to sort the order where each standalone task is executed. Then you can proceed like this:
 
 ```javascript
-module.exports = function (gulpContainer, settings, errorHandler) {
+module.exports = function (gulpContainer, settings, errorHandler, livereload) {
     var gulp = gulpContainer.gulp;
     var gulpSequence = require('gulp-sequence');
 

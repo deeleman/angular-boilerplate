@@ -1,3 +1,9 @@
-body {
-    color: black;
+@charset "UTF-8";
+
+@import "normalize";
+@import "variables";
+@import "mixins";
+
+html, body {
+
 }
