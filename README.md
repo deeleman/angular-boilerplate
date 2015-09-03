@@ -5,51 +5,66 @@ This boilerplate repo, based on my very own [Frontend Boilerplate](https://githu
 * SASS building and compiling into CSS in two flavors (normal and compressed) with auto-prefixing support
 * Javascript concatenation and build in two flavors (normal and uglified)
 * Built-in web server for debugging purposes (based on Connect)
-* File change tracking (including adding or unlinking files on runtime) with browser LiveReload support
-* Complete Angular 1.4.x scaffolding and 3rd party dependency management with full support for real time adding and managing dependencies and bundling its source files in a minified way onto the project.
+* File change tracking (including adding or unlinking files on runtime) with browser LiveReload support (a browser extension](http://livereload.com/extensions/) is required aside);
+* Complete Angular 1.4.x scaffolding and 3rd party dependency management with full support for hot-swapping dependencies on runtime.
 
 All the aforementioned features are configurable so any change in paths and filenames can be done effortlessly.
 
-## Installing dependencies and building the project
+## Installation and Deployment
 
-Dependencies installation rely basically on the NPM CLI. For simplicity's sake tools such as Bower, Yeoman or Bundle have not been considered for this boilerplate. The only requirement prior to proceed with the dependencies installation is to have Gulp installed globally onto your system. Should it is not available already on your system, please execute the following:
+The whole project deployment relies basically on the NPM CLI. For simplicity's sake tools such as Bower, Yeoman or Bundle have not been considered for this boilerplate and a *shell* script has been attached to the project wrapping the necessary `npm` commands around a guided walkthrough.
+
+### Running the application for the first time
+
+For installing the project dependencies (basically Angular, Angular plugins and Lodash), testing tools and build runners and then spawning an instance of the web server included we just need to follow the instructions on screen after executing the following command (please note that your SUDO password might be requested at some point):
 
 ```bash
-$ sudo npm i -g gulp
+$ ./install.sh
 ```
 
- Once Gulp is available in your system, you can trigger the installation and kickstart development on your new project by cloning this repo and executing the following commands (please replace `[your project name]` with your folder name of choice):
+After running the installation command the `node_modules` and `public` folders (the latter will contain your SPA build) will show up in your project folder. From that point on you can see the site at [http://localhost:3000](http://localhost:3000) (or any other port of your choice if you tweaked the `server > port` setting at `/gulp.conf.js`)
+
+### Further build execution
+
+You do not need to run the installation script every time you want to serve up the application. Once the build files have been successfully compiled onto the `/public` folder and provided you do not want to introduce any change in the front-end files, you can just execute the following in order to spawn the Node.js web server delivering the SPA assets and acting as a proxy for the Tornado web server.
 
 ```bash
-$ git clone https://github.com/deeleman/frontend-boilerplate.git [your project name]
-$ cd [your project name]
-$ sudo npm install
+$ gulp serve
+```
+
+If you want to update the front-end source files though you will want to trigger an agent that takes care of re-compiling the source HTML5, SASS and Javascript files while watching for changes, serving the whole application through [http://127.0.0.1:3000](http://127.0.0.1:3000). This simple command will do the trick:
+
+```bash
 $ gulp dev
 ```
 
-What has just happened? After installing all third-party dependencies, the `gulp dev` task command packages whatever Javascript and SASS files might be found within the `/src` tree folder. A local server pointing to `/public` (which acts as the release folder - you will learn later on how to customize this if required) is then spawned in port 3000 (or any port of your choice - more info below) and from that point on all updated files are watched and thus compiled should any change is detected.
+### Troubleshooting the app
 
-**Please note:** In order to leverage the browser auto-reload functionality you will need to install the associated [browser extension](http://livereload.com/extensions/) for your browser of choice.
+Do not forget to instance the Tornado server before triggering the SPA build. Otherwise you will be served with a fancy error message with further instructions. If further issues arise, please check the following:
 
-### Where to store your files
+* Make sure `gulp` is up and running. Sometimes it might crash due to unexpected exceptions or because errors when compiling source files because of malformed code, in which case the Node.js server is no longer available. Disregard any port conflict messages since this issue does not impact the app and double check all he settings at `/gulp.conf.js` are correct.
+* Please check that the Node.js proxy server is properly configured with the information required to consume the backend API service at `/server/proxy_settings.js`.
+* The setup required by Angular for consuming the bundled Node.js server is available at `/src/js/settings.js`. Please update it if not correct (p.eg. you might have updated the Gulp settings previously) and respawn `gulp dev` afterwards.
+
+## Where to store your files
 
 This template takes separation of concerns quite seriously, so development and build files live in different workspaces in order to prevent errors and ease the development effort. Here you have a rundown of the different locations you have:
 
-#### Third-party dependencies and Angular plugins and extension modules
+### Third-party dependencies and Angular plugins and extension modules
 TBD
 
-#### Karma and Protractor test files
+### Karma and Protractor test files
 You will find kickstart templates for your unit tests already available at `/test/ng` (at the time of this writing the template sets a proper template for filters). Feel free to finetune the Karma settings file `/karma.conf.js`.
 
 For all your functional and E2E testing requirements the installation script deployed already a fully functional Selenium webdriver with Chrome as the default headless browser engine. Feel free to finetune the Protractor settings file `/protractor.conf.js`.
 
-#### Source Javascript files
+### Source Javascript files
 Please store all your Javascript files belonging to your project at `src/js`. Anything available there will be later on digested into a single application file and saved onto `public/assets/js` (the HTML shell already points out to the destination location) by tracking down all dependencies found from `src/js/index.js`and beyond. **Never save Javascript files in the the `public` root path**. The building configuration will do that for you and it is not a good practice to mix up build files with actual dev files. Same applies to third-party dependencies.
 
-#### SCSS files
+### SCSS files
 Please store your SASS files at `src/scss`. Gulp will watch such directory and will compile and export your SASS files into a single CSS file available for your page at `public/assets/css`. Same as we do for Javascript, you don't want to save under any circumstances any SASS/CSS file in any location other than `src/scss`.
 
-#### Gulp tasks
+### Gulp tasks
 Please store your Gulp tasks as standalone module files into `gulp/tasks`. A complete [IoC](https://en.wikipedia.org/wiki/Inversion_of_control) setup has been put in place to ensure that each one of those standalone tasks files are available throughout the application and across different modules and files. You can also create composite tasks wrapping several other tasks by means of "Gulp containers". Doing so prevents you from having to track down tasks shared across different files later on, easing project maintenance down the line. In order to do so, just use the following template for your task:
 
 ```javascript
@@ -114,7 +129,7 @@ module.exports = function (gulpContainer, settings, errorHandler, livereload) {
 };
 ```
 
-#### How to customise and update the building settings
+### How to customise and update the building settings
 As you can see our Gulp tasks template includes a `settings` parameter in its payload. Its just a reference to the `gulp/gulp.settings.json` file where building parameters can be set by yourself. This is a convenience file which is meant to store all the settings that configure the building processes, so once you have properly coded a task module, you do not need to tweak its code to configure or update its settings later on.
 
 The settings object comes in the form of a Javascript hash object representing the data scheme contained at `gulp/gulp.settings.json` so, for argument's sake, you can access properties like the file path for the concatenated CSS file with object references such as `settings.sass.dest`.
