@@ -49,10 +49,10 @@ Do not forget to instance the Tornado server before triggering the SPA build. Ot
 This template takes separation of concerns quite seriously, so development and build files live in different workspaces in order to prevent errors and ease the development effort. Here you have a rundown of the different locations you have:
 
 ### Third-party dependencies and Angular plugins and extension modules
-TBD
+Dump all your Angular modules and elements inside the `/src/js` fodler. There are example modules and Javascript implementations for the most common elements in anAngular application: A module including its config setup, a factory and a service, and a controller. Copy any file into your folder of choice, replace the module references and profit!
 
 ### Karma and Protractor test files
-You will find kickstart templates for your unit tests already available at `/test/ng` (at the time of this writing the template sets a proper template for filters). Feel free to finetune the Karma settings file `/karma.conf.js`.
+You will find kickstart templates for your unit tests already available at `/test/ng` (at the time of this writing this project still lacks a proper template spec for directives and filters). Feel free to finetune the Karma settings file `/karma.conf.js`.
 
 For all your functional and E2E testing requirements the installation script deployed already a fully functional Selenium webdriver with Chrome as the default headless browser engine. Feel free to finetune the Protractor settings file `/protractor.conf.js`.
 
