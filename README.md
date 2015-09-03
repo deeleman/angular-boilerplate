@@ -43,8 +43,6 @@ $ gulp dev
 Do not forget to instance the Tornado server before triggering the SPA build. Otherwise you will be served with a fancy error message with further instructions. If further issues arise, please check the following:
 
 * Make sure `gulp` is up and running. Sometimes it might crash due to unexpected exceptions or because errors when compiling source files because of malformed code, in which case the Node.js server is no longer available. Disregard any port conflict messages since this issue does not impact the app and double check all he settings at `/gulp.conf.js` are correct.
-* Please check that the Node.js proxy server is properly configured with the information required to consume the backend API service at `/server/proxy_settings.js`.
-* The setup required by Angular for consuming the bundled Node.js server is available at `/src/js/settings.js`. Please update it if not correct (p.eg. you might have updated the Gulp settings previously) and respawn `gulp dev` afterwards.
 
 ## Where to store your files
 
